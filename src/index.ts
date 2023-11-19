@@ -3,9 +3,10 @@ import * as dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import nocache from "nocache";
-import { messagesRouter, healthRouter } from "./routes";
+import { messagesRouter, healthRouter, collectionsRouter } from "./routes";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
+import { initMongoConnection, closeMongoConnection } from './mongo'
 
 dotenv.config();
 
@@ -60,10 +61,17 @@ app.use(
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
 apiRouter.use("/health", healthRouter);
+apiRouter.use("/collections", collectionsRouter);
 
 app.use(errorHandler);
 app.use(notFoundHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await initMongoConnection();
   console.log(`Listening on port ${PORT}`);
+});
+
+process.on("SIGINT", async () => {
+  await closeMongoConnection();
+  process.exit();
 });
