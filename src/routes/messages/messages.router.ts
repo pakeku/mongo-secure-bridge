@@ -2,7 +2,7 @@ import express from "express";
 import {
   checkRequiredPermissions,
   validateAccessToken,
-} from "../middleware/auth0.middleware";
+} from "../../middleware/auth0.middleware";
 import { AdminMessagesPermissions } from "./messages.permissions";
 import {
   getAdminMessage,
