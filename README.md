@@ -58,14 +58,31 @@ Folder Structure
 
 Your project should be structured as follows:
 
--   `src/`: Source files for your Express.js server.
--   `src/index.ts`: Entry point for the server.
--   `...`: Additional directories and files as needed.
-
-Contributing
-------------
-
-Contributions to the Mongo Secure Bridge project are welcome. Please read our contribution guidelines for more information.
+```md
+mongo-secure-bridge/
+│
+├── server/               # All backend code
+│   ├── config/           # Configuration files and environment variables
+│   ├── models/           # MongoDB models (Mongoose schemas)
+│   ├── routes/           # Express routes
+│   ├── middleware/       # Middlewares for Express (e.g., for Auth0)
+│   ├── utils/            # Utility functions and helpers
+│   └── index.ts          # Main server file (entry point for the Express app)
+├── client/               # All frontend code
+│   ├── public/           # Public assets like HTML file, images, etc.
+│   ├── src/              # React source files
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   ├── app.js        # Main React application file
+│   │   └── index.js      # Entry point for React application
+│   └── build/            # Compiled frontend files (served by Express)
+│
+├── .env                  # Environment variables (not to be committed)
+├── .gitignore            # Files and folders to be ignored by Git
+├── package.json          # NPM dependencies and scripts
+├── README.md             # Project documentation
+└── docker-compose.yml    # Docker configuration file (optional)
+```
 
 License
 -------
